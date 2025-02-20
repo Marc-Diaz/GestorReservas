@@ -1,0 +1,16 @@
+{
+  "recursos": [
+    {
+      "idRecurso": 1,
+      "imatge": "bici.jpg",
+      "recurs": "bicicleta",
+      "descripcio": "Es una bicicleta"
+    },
+    {
+      "idRecurso": 2,
+      "imatge": "movil.jpg",
+      "recurs": "movil",
+      "descripcio": "Funciona"
+    }
+  ]
+}

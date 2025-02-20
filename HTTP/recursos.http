@@ -1,0 +1,31 @@
+GET http://localhost:3001/Recursos  
+
+### funciona
+
+GET http://localhost:3001/Recursos/1
+--
+### funciona
+
+POST http://localhost:3001/Recursos HTTP/1.1
+Content-Type: application/json
+
+{
+    "idRecurso": 2,
+    "imatge": "movil.jpg",
+    "recurs": "movil",
+    "descripcio": "Funciona"
+}
+
+### funciona
+PUT http://localhost:3001/Recursos/3 HTTP/1.1
+Content-Type: application/json
+{
+    "idRecurso": 2,
+    "imatge": "movil.jpg",
+    "recurs": "movil",
+    "descripcio": "NoFunciona"
+}
+### funciona
+DELETE http://localhost:3001/Recursos/2 HTTP/1.1
+
+

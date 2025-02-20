@@ -1,0 +1,18 @@
+{
+    "reservas": [
+        {
+            "idReserva": 1,
+            "DNI": "12345678A",
+            "Data_Inici": "30/05/2021",
+            "Data_Fin": "15/06/2021",
+            "id_Recurso": "1"
+        },
+        {
+            "idReserva": 2,
+            "DNI": "87654321B",
+            "Data_Inici": "01/06/2021",
+            "Data_Fin": "10/06/2021",
+            "id_Recurso": "2"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+GET http://localhost:3001/Usuarios  
+
+### funciona
+
+GET http://localhost:3001/Usuarios/12345678A
+--
+### funcionas
+
+POST http://localhost:3001/Usuarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "DNI": "21345678C",
+  "Mail": "janedoe@gmail.com",
+  "Rol": "Cliente",
+  "Nom": "Jane Doe"
+}
+
+### funciona
+PUT http://localhost:3001/Usuarios/21345678C HTTP/1.1
+Content-Type: application/json
+--
+
+{
+  "DNI": "21345678C",
+  "Mail": "janedoe@gmail.com",
+  "Rol": "Admin",
+  "Nom": "Jane Doe"
+}
+### funciona
+DELETE http://localhost:3001/Usuarios/21345678C HTTP/1.1
+
+

@@ -1,0 +1,16 @@
+{
+  "usuarios": [
+    {
+      "DNI": "12345678A",
+      "Mail": "jhondoe@gmail.com",
+      "Rol": "Cliente",
+      "Nom": "Jhon Doe"
+    },
+    {
+      "DNI": "87654321B",
+      "Mail": "janedoe@gmail.com",
+      "Rol": "Cliente",
+      "Nom": "Jane Doe"
+    }
+  ]
+}

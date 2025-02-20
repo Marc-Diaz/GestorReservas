@@ -1,0 +1,31 @@
+GET http://localhost:3001/Notificaciones  
+
+### funciona
+
+GET http://localhost:3001/Notificaciones/2
+
+### funciona
+
+POST http://localhost:3001/Notificaciones HTTP/1.1
+Content-Type: application/json
+{
+    "Recurs": "2",
+    "Usuari": "3",
+    "Data": "16/03/2024",
+    "Modificacio": "Reserva acceptada"
+}
+
+### funciona
+PUT http://localhost:3001/Notificaciones/3 HTTP/1.1
+Content-Type: application/json
+
+{
+    "Recurs": "2",
+    "Usuari": "3",
+    "Data": "16/03/2024",
+    "Modificacio": "Reserva cancelada"
+}
+### funciona
+DELETE http://localhost:3001/Notificaciones/3 HTTP/1.1
+
+
