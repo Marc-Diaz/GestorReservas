@@ -10,7 +10,7 @@ app.use(bodyParser.json());
 //Llegeix les dades del fitxer
 const readData = () => {
     try {
-        const data = fs.readFileSync("./JSON/Usuarios.json");
+        const data = fs.readFileSync("JSON/Usuarios.json");
         return JSON.parse(data);
     } catch (error) {
         console.error(error);
@@ -20,7 +20,7 @@ const readData = () => {
 //Escriu dades al fitxer
 const writeData = (data) => {
     try {
-        fs.writeFileSync("./JSON/Usuarios.json", JSON.stringify(data));
+        fs.writeFileSync("JSON/Usuarios.json", JSON.stringify(data));
     } catch (error) {
         console.error(error);
     }
@@ -44,7 +44,7 @@ app.get("/Usuarios/:id",(req,res)=>{
     console.log(id);
     const usuario = data.usuarios.find((usuario)=>usuario.DNI === id);
 
-    if(!usuario) res.status(404).json({message : "Usuario not found"})
+    if(!usuario) res.status(404).json({message : "Usuari no trobat"});
     res.json(usuario);
 });
 
@@ -56,9 +56,15 @@ app.post("/Usuarios",(req,res)=>{
     const newUsuario={
         ...body,
     };
-    data.usuarios.push(newUsuario);
-    writeData(data);
-    res.json(newUsuario);
+    if(data.usuarios.some(usuario => usuario.DNI == newUsuario.DNI)){
+        res.status(409).json({message : "Usuario duplicat"})
+    }
+    else{
+        data.usuarios.push(newUsuario);
+        writeData(data);
+        res.json(newUsuario);
+    }
+    
 });
 
 //PUT
@@ -67,12 +73,17 @@ app.put("/Usuarios/:id", (req, res) => {
     const id = req.params.id;
     const body = req.body;
     const usuarioIndex = data.usuarios.findIndex((usuario) => usuario.DNI === id);
-    data.usuarios[usuarioIndex] = {
-        ...data.usuarios[usuarioIndex],
-        ...body,
-    };
-    writeData(data);
-    res.json({ message: "Usuario updated successfully" });
+    if(usuarioIndex == -1){
+        res.status(404).json({message : "Usuari no trobat"});
+    }
+    else{
+        data.usuarios[usuarioIndex] = {
+            ...data.usuarios[usuarioIndex],
+            ...body,
+        };
+        writeData(data);
+        res.json({ message: "Usuario updated successfully" });
+    }
 });
     
 //DELETE
@@ -80,10 +91,15 @@ app.delete("/Usuarios/:id", (req, res) => {
     const data = readData();
     const id = req.params.id;
     const usuarioIndex = data.usuarios.findIndex((usuario) => usuario.DNI === id);
-    data.usuarios.splice(usuarioIndex, 1);
-    writeData(data);
-    res.json({message: "Usuario deleted successfully"});
-})
+    if(usuarioIndex == -1){
+        res.status(404).json({message : "Usuari no trobat"});
+    }
+    else{
+        data.usuarios.splice(usuarioIndex, 1);
+        writeData(data);
+        res.json({message: "Usuario deleted successfully"});
+    }    
+});
 
 //Funció per escoltar
 app.listen(3001,() => {

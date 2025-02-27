@@ -42,7 +42,7 @@ app.get("/Notificaciones/:id",(req,res)=>{
     const data=readData();
     const id = parseInt(req.params.id);
     const notificacion = data.notificaciones.find((notificacion)=>notificacion.idNotificacion === id);
-    if(!notificacion) res.status(404).json({message : "Notificacion not found"})
+    if(!notificacion) res.status(404).json({message : "Notificacio no trovada"})
     res.json(notificacion);
 });
 
@@ -54,9 +54,14 @@ app.post("/Notificaciones",(req,res)=>{
         idNotificacion:data.notificaciones.length+1,
         ...body,
     };
-    data.notificaciones.push(newNotificacion);
-    writeData(data);
-    res.json(newNotificacion);
+    if(data.notificaciones.some(notificacion => notificacion.idNotificacio == newNotificacion.idNotificacio)){
+        res.status(409).json({ message : "Notifcacio duplicada"})
+    }
+    else {
+        data.notificaciones.push(newNotificacion);
+        writeData(data);
+        res.json(newNotificacion);
+    }
 });
 
 //PUT
@@ -65,12 +70,17 @@ app.put("/Notificaciones/:id", (req, res) => {
     const body = req.body;
     const id = parseInt(req.params.idNotificacio);
     const notificacionIndex = data.notificaciones.findIndex((notificacion) => notificacion.idNotificacion === id);
-    data.notificaciones[notificacionIndex] = {
-        ...data.notificaciones[notificacionIndex],
-        ...body,
-    };
-    writeData(data);
-    res.json({ message: "Notificacion updated successfully" });
+    if(notificacionIndex == -1){
+        res.status(404).json({message : "Notificacio no trovada"})
+    }
+    else{
+        data.notificaciones[notificacionIndex] = {
+            ...data.notificaciones[notificacionIndex],
+            ...body,
+        };
+        writeData(data);
+        res.json({ message: "Notificacion updated successfully" });
+    }
 });
     
 //DELETE
@@ -78,9 +88,14 @@ app.delete("/Notificaciones/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
     const notificacionIndex = data.notificaciones.findIndex((notificacion) => notificacion.idNotificacion === id);
-    data.notificaciones.splice(notificacionIndex, 1);
-    writeData(data);
-    res.json({message: "Notificacion deleted successfully"});
+    if(notificacionIndex == -1){
+        res.status(404).json({message : "Notificacio no trovada"})
+    }
+    else{
+        data.notificaciones.splice(notificacionIndex, 1);
+        writeData(data);
+        res.json({message: "Notificacion deleted successfully"});
+    }
 })
 
 //Funció per escoltar

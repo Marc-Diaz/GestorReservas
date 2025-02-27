@@ -2,7 +2,7 @@ GET http://localhost:3001/Reservas
 
 ### funciona
 
-GET http://localhost:3001/Reservas/1
+GET http://localhost:3001/Reservas/10
 --
 ### funciona
 
@@ -16,7 +16,7 @@ Content-Type: application/json
 }
 
 ### funciona
-PUT http://localhost:3001/Reservas/3 HTTP/1.1
+PUT http://localhost:3001/Reservas/4 HTTP/1.1
 Content-Type: application/json
 --
 {
@@ -26,6 +26,6 @@ Content-Type: application/json
   "id_Recurso": "2"
 }
 ### funciona
-DELETE http://localhost:3001/Reservas/2 HTTP/1.1
+DELETE http://localhost:3001/Reservas/3 HTTP/1.1
 
 

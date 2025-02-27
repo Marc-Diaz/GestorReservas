@@ -45,7 +45,7 @@ app.get("/Recursos/:id",(req,res)=>{
     console.log(recurs)
     console.log(req.params.id)
     console.log(id)
-    if(!recurs) res.status(404).json({message : "Recurso not found"})
+    if(!recurs) res.status(404).json({message : "Recurs no trobat"})
     res.json(recurs);
 });
 
@@ -58,9 +58,14 @@ app.post("/Recursos",(req,res)=>{
         idRecurso:data.recursos.length+1,
         ...body,
     };
-    data.recursos.push(newRecurs);
-    writeData(data);
-    res.json(newRecurs);
+    if(data.recursos.some(recurso => recurso.idRecurso == newRecurs.idRecurso)){
+        res.status(409).json({message : "Recurs duplicat"})
+    }
+    else{
+        data.recursos.push(newRecurs);
+        writeData(data);
+        res.json(newRecurs);
+    }
 });
 
 //PUT
@@ -69,12 +74,17 @@ app.put("/Recursos/:id", (req, res) => {
     const body = req.body;
     const id = parseInt(req.params.idRecurso);
     const recursIndex = data.recursos.findIndex((recurs) => recurs.idRecurso === id);
-    data.recursos[recursIndex] = {
-        ...data.recurs[recursIndex],
-        ...body,
-    };
-    writeData(data);
-    res.json({ message: "Recurso updated successfully" });
+    if(recursIndex == -1){
+        res.status(404).json({message : "Recurso no trobat"})
+    }
+    else{
+        data.recursos[recursIndex] = {
+            ...data.recurs[recursIndex],
+            ...body,
+        };
+        writeData(data);
+        res.json({ message: "Recurso updated successfully" });
+    }
 });
     
 //DELETE
@@ -82,9 +92,14 @@ app.delete("/Recursos/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
     const recursosIndex = data.recursos.findIndex((recurs) => recurs.idRecurso === id);
-    data.recursos.splice(recursosIndex, 1);
-    writeData(data);
-    res.json({message: "Recurso deleted successfully"});
+    if(recursosIndex == -1){
+        res.status(404).json({message : "Recurso no trobat"})
+    }
+    else{
+        data.recursos.splice(recursosIndex, 1);
+        writeData(data);
+        res.json({message: "Recurso deleted successfully"});
+    }
 })
 
 //Funció per escoltar
