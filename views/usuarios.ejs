@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="lista.css">
+    <link rel="stylesheet" href="barraNavegacion.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+    </header>
+    <main>
+        <section>
+            <h2>Llistat Usuaris</h2>
+            <ul class="lista">
+                <% data.usuarios.forEach(usuario => { %>
+                <li class="item">
+                    <a href="/Usuarios/<%= usuario.DNI %>" class="informacion">
+                        <strong><%= usuario.nom %></strong>
+                        <strong>Rol: <%= usuario.rol %></strong>
+                    </a>
+                    <a href="/Usuarios/editarUsuario/<%= usuario.DNI %>" class="editar"><strong>Editar Usuario</strong></a>
+                </li>
+                <%}) %>
+                <li class="item"><a href="/Usuarios/crearUsuario"><strong>Crear Usuario</strong></a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

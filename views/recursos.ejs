@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="lista.css">
+    <link rel="stylesheet" href="barraNavegacion.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+    </header>
+    <main>
+        <section>
+            <h2>Llistat recursos</h2>
+            <ul class="lista">
+                <% data.recursos.forEach(recurso => { %>
+                <li class="item">
+                    <a href="/Recursos/<%= recurso.idRecurso %>" class="informacion">
+                        <strong><%= recurso.nom %></strong>
+                        <strong>Categoria: <%= recurso.categoria %></strong>
+                        <strong>Preu hora: <%= recurso.preuHora %>€</strong>
+                    </a>
+                    <a href="/Recursos/editarRecurso/<%= recurso.idRecurso %>" class="editar"><strong>Editar Recurso</strong></a>
+                </li>
+                <%}) %>
+                <li class="item"><a href="/Recursos/crearRecurso"><strong>Añadir Recurso</strong></a></li>
+            </ul>
+        </section>
+    </main>
+</body>
+</html>

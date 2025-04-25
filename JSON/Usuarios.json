@@ -1,1 +1,28 @@
-{"usuarios":[{"DNI":"12345678A","Mail":"jhondoe@gmail.com","Rol":"Cliente","Nom":"Jhon Doe"},{"DNI":"87654321B","Mail":"janedoe@gmail.com","Rol":"Cliente","Nom":"Jane Doe"},{"DNI":"213456478C","Mail":"janedoe@gmail.com","Rol":"Admin","Nom":"Jane Doe"}]}
+{
+    "usuarios": [
+        {
+            "DNI": "12345678A",
+            "mail": "jhondoe@gmail.com",
+            "rol": "Cliente",
+            "nom": "Jhon Doe"
+        },
+        {
+            "DNI": "87654321B",
+            "mail": "janedoe@gmail.com",
+            "rol": "Cliente",
+            "nom": "Jane Doe"
+        },
+        {
+            "DNI": "213456478C",
+            "mail": "janedoe@gmail.com",
+            "rol": "Admin",
+            "nom": "Jane Doe"
+        },
+        {
+            "DNI": "56874211y",
+            "mail": "alguien@gmail.com",
+            "rol": "Cliente",
+            "nom": "Alguien"
+        }
+    ]
+}

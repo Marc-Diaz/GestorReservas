@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="../../barraNavegacion.css">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../formulario.css">
+</head>
+
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+        <h2><%= usuario.nom %></h2>
+    </header>
+    <main>
+        <section>
+            <h2>Editar Usuario</h2>
+            <form id="formulario" action="/recursos/<%= usuario.DNI %>" method="post">
+                <label for="dni">DNI: </label>
+                <input type="text" value="<%= usuario.DNI %>" name="dni" id="dni" required>
+
+                <label for="mail">Correo: </label>
+                <input type="text" value="<%= usuario.mail %>"  name="mail" id="mail" required>
+
+                <label for="rol">Rol: </label>
+                <input type="text" value="<%= usuario.rol %>" name="rol" id="rol" required>
+
+                <label for="nombre">Nombre: </label>
+                <input type="text" value="<%= usuario.nom %>" name="nombre" id="nombre" required>
+
+                <button type="submit" id="crear">Editar Usuario</button>
+            </form>
+        </section>  
+    </main>
+</body>
+</html>

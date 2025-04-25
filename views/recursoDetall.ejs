@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../barraNavegacion.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <h3><%= recurs.nom %></h3>
+    <h3><%= recurs.preuHora %></h3>
+    <img src="<%= recurs.imatge %>" alt="">
+    <p><%= recurs.descripcio %></p>
+    <p><%= recurs.categoria %></p>
+</body>
+</html>

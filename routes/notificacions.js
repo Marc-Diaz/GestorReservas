@@ -4,8 +4,9 @@ import fs from "fs";
 import bodyParser from "body-parser";
 
 //Crea l'objecte de l'aplicació
-const app = express();
-app.use(bodyParser.json());
+const route = express.Router();
+
+route.use(bodyParser.json());
 
 //Llegeix les dades del fitxer
 const readData = () => {
@@ -27,27 +28,27 @@ const writeData = (data) => {
 };
 
 
-app.get("/", (req,res)=>{
-    res.send("Welcome to my first API with Node.js");
-});
 
 //GET
-app.get("/Notificaciones", (req,res)=>{
+route.get("/", (req,res)=>{
     const data = readData();
-    res.json(data.notificaciones);
+    //res.render("notificaciones", {data})
+    res.json(data.notificaciones)
 });
 
 //GET per id
-app.get("/Notificaciones/:id",(req,res)=>{
+route.get("/:id",(req,res)=>{
     const data=readData();
     const id = parseInt(req.params.id);
     const notificacion = data.notificaciones.find((notificacion)=>notificacion.idNotificacion === id);
     if(!notificacion) res.status(404).json({message : "Notificacio no trovada"})
-    res.json(notificacion);
+        //res.render("notificacion", {notificacion})
+        res.json(notificacion);
+
 });
 
 //POST
-app.post("/Notificaciones",(req,res)=>{
+route.post("/",(req,res)=>{
     const data=readData();
     const body=req.body;
     const newNotificacion={
@@ -65,7 +66,7 @@ app.post("/Notificaciones",(req,res)=>{
 });
 
 //PUT
-app.put("/Notificaciones/:id", (req, res) => {
+route.put("/:id", (req, res) => {
     const data = readData();
     const body = req.body;
     const id = parseInt(req.params.idNotificacio);
@@ -84,7 +85,7 @@ app.put("/Notificaciones/:id", (req, res) => {
 });
     
 //DELETE
-app.delete("/Notificaciones/:id", (req, res) => {
+route.delete("/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
     const notificacionIndex = data.notificaciones.findIndex((notificacion) => notificacion.idNotificacion === id);
@@ -98,7 +99,4 @@ app.delete("/Notificaciones/:id", (req, res) => {
     }
 })
 
-//Funció per escoltar
-app.listen(3001,() => {
-    console.log("Server listening on port 3001");
-});
+export default route

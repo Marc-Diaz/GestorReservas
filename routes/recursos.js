@@ -2,10 +2,13 @@
 import express from "express";
 import fs from "fs";
 import bodyParser from "body-parser";
+import { htmlNav } from "../config.js";
+
 
 //Crea l'objecte de l'aplicació
-const app = express();
-app.use(bodyParser.json());
+const route = express.Router();
+
+route.use(bodyParser.json());
 
 //Llegeix les dades del fitxer
 const readData = () => {
@@ -26,31 +29,46 @@ const writeData = (data) => {
     }
 };
 
-
-app.get("/", (req,res)=>{
-    res.send("Welcome to my first API with Node.js");
-});
-
 //GET
-app.get("/Recursos", (req,res)=>{
+route.get("/", (req,res)=>{
     const data = readData();
-    res.json(data.recursos);
+    res.render("recursos", {data, htmlNav})
+    //res.json(data.recursos);
 });
 
-//GET per id
-app.get("/Recursos/:id",(req,res)=>{
+//Get pagina crear Recurso
+route.get("/crearRecurso", (req,res)=>{
+    res.render("recursoCrear", {htmlNav})
+    //res.json(data.recursos);
+});
+
+//Get pagina editar Recurso
+route.get("/editarRecurso/:id", (req,res)=>{
     const data=readData();
     const id = parseInt(req.params.id);
     const recurs = data.recursos.find((recurs)=>recurs.idRecurso === id);
     console.log(recurs)
-    console.log(req.params.id)
-    console.log(id)
     if(!recurs) res.status(404).json({message : "Recurs no trobat"})
-    res.json(recurs);
+    else {
+        let textArea = `<textarea rows="10" cols="50" name="descripcion" id="descripcion" required style="resize: none;">
+                    ${recurs.descripcio}
+                </textarea>`
+        res.render("recursoEditar", {recurs, textArea, htmlNav})
+    } 
+});
+
+//GET per id
+route.get("/:id",(req,res)=>{
+    const data=readData();
+    const id = parseInt(req.params.id);
+    const recurs = data.recursos.find((recurs)=>recurs.idRecurso === id);
+    if(!recurs) res.status(404).json({message : "Recurs no trobat"})
+    else res.render("recursoDetall", {recurs, htmlNav})
+    //res.json(recurs);
 });
 
 //POST
-app.post("/Recursos",(req,res)=>{
+route.post("/",(req,res)=>{
     const data=readData();
     const body=req.body;
     //todo lo que viene en ...body se agrega al nuevo libro
@@ -69,7 +87,7 @@ app.post("/Recursos",(req,res)=>{
 });
 
 //PUT
-app.put("/Recursos/:id", (req, res) => {
+route.put("/:id", (req, res) => {
     const data = readData();
     const body = req.body;
     const id = parseInt(req.params.idRecurso);
@@ -88,7 +106,7 @@ app.put("/Recursos/:id", (req, res) => {
 });
     
 //DELETE
-app.delete("/Recursos/:id", (req, res) => {
+route.delete("/:id", (req, res) => {
     const data = readData();
     const id = parseInt(req.params.id);
     const recursosIndex = data.recursos.findIndex((recurs) => recurs.idRecurso === id);
@@ -102,7 +120,4 @@ app.delete("/Recursos/:id", (req, res) => {
     }
 })
 
-//Funció per escoltar
-app.listen(3001,() => {
-    console.log("Server listening on port 3001");
-});
+export default route

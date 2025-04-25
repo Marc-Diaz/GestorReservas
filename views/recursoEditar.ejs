@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    
+    <link rel="stylesheet" href="../../barraNavegacion.css">
+    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../formulario.css">
+</head>
+
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+        <h2><%= recurs.nom %></h2>
+    </header>
+    <main>
+        <section>
+            <h2>Editar recurso</h2>
+            <form id="formulario" action="/recursos/<%= recurs.id%>" method="post">
+                <label for="nombre">Nombre: </label>
+                <input type="text" name="nombre" value=" <%= recurs.nom %>" id="nombre" required>
+
+                <label for="nombre">Imagen: </label>
+                <input type="text" name="enlace-imagen" value=" <%=recurs.imatge %>" id="enlace-imagen" required>
+
+                <label for="precio-hora">Precio Hora: </label>
+                <input type=number"" name="precio-hora" value=" <%=recurs.preuHora %>" id="precio-hora" required>
+
+                <label for="categoria">Categoria: </label>
+                <input type="text" name="categoria" value=" <%=recurs.categoria %>" id="categoria" required>
+
+                <label for="descripcion">Descripcion: </label>
+                <%- textArea %>
+                <button type="submit" id="editar-recurso">Guardar cambios</button>
+                <span>&nbsp;</span>
+            </form>
+        </section>  
+    </main>
+</body>
+</html>

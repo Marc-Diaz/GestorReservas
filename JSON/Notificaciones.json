@@ -2,24 +2,24 @@
   "notificaciones": [
     {
       "idNotificacion": 1,
-      "Recurs": "1",
-      "Usuari": "1",
-      "Data": "20/05/2021",
-      "Modificacio": "Reserva afegida"
+      "recurs": "1",
+      "usuari": "1",
+      "data": "20/05/2021",
+      "modificacio": "Reserva afegida"
     },
     {
       "idNotificacion": 2,
-      "Recurs": "1",
-      "Usuari": "1",
-      "Data": "26/05/2021",
-      "Modificacio": "Reserva cancelada"
+      "recurs": "1",
+      "usuari": "1",
+      "data": "26/05/2021",
+      "modificacio": "Reserva cancelada"
     },
     {
       "idNotificacion": 4,
-      "Recurs": "2",
-      "Usuari": "3",
-      "Data": "16/03/2024",
-      "Modificacio": "Reserva acceptada"
+      "recurs": "2",
+      "usuari": "3",
+      "data": "16/03/2024",
+      "modificacio": "Reserva acceptada"
     }
   ]
 }

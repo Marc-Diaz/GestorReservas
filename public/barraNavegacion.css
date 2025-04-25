@@ -1,0 +1,23 @@
+/* Navegación */
+nav {
+    background-color: #FF6F00; /* Naranja */
+    padding: 10px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    color: #007BFF; /* Azul para el hover */
+}

@@ -1,0 +1,3 @@
+{
+    "ignore" : ["Notificaciones.json", "Recursos.json", "Reservas.json", "Usuarios.json"]
+}

@@ -1,16 +1,36 @@
 {
-  "recursos": [
-    {
-      "idRecurso": 1,
-      "imatge": "bici.jpg",
-      "recurs": "bicicleta",
-      "descripcio": "Es una bicicleta"
-    },
-    {
-      "idRecurso": 2,
-      "imatge": "movil.jpg",
-      "recurs": "movil",
-      "descripcio": "Funciona"
-    }
-  ]
+    "recursos": [
+        {
+            "idRecurso": 1,
+            "imatge": "https://carbonbikes.es/cdn/shop/files/biciamarillanegra_1024x1024.jpg?v=1742981345",
+            "nom": "Bicicleta CBK Aero Disco",
+            "descripcio": "Bicicleta CBK para discoteca , sin cableado exterior,  innovando día a día para ofrecerte la mejor relación calidad/precio de la bicicleta ",
+            "preuHora": 50,
+            "categoria": "Deportes"
+        },
+        {
+            "idRecurso": 2,
+            "imatge": "movil.jpg",
+            "nom": "movil",
+            "descripcio": "Funciona",
+            "preuHora": 10,
+            "categoria": "Teconologia"
+        },
+        {
+            "idRecurso": 3,
+            "imatge": "table.png",
+            "nom": "Tablet",
+            "descripcio": "Es una tablet muy bonita",
+            "preuHora": "50",
+            "categoria": "Electronica"
+        },
+        {
+            "idRecurso": 4,
+            "imatge": "rj45.png",
+            "nom": "RJ45",
+            "descripcio": "Es un rj45 muy util",
+            "preuHora": "20",
+            "categoria": "Redes"
+        }
+    ]
 }

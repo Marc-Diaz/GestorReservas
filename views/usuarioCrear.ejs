@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="../barraNavegacion.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../formulario.css">
+</head>
+
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+    </header>
+    <main>
+        <section>
+            <h2>Crear Usuario</h2>
+            <form id="formulario">
+                <label for="dni">DNI: </label>
+                <input type="text" name="dni" id="dni" required>
+
+                <label for="mail">Correo: </label>
+                <input type="text" name="mail" id="mail" required>
+
+                <label for="rol">Rol: </label>
+                <input type="text" name="rol" id="rol" required>
+
+                <label for="nombre">Nombre: </label>
+                <input type="text" name="nombre" id="nombre" required>
+
+                <button type="submit" id="crear">Crear Usuario</button>
+                <span>&nbsp;</span>
+            </form>
+        </section>
+    </main>
+    <script>
+        const $ = el => document.querySelector(el);
+        const formularioRecurso = $('#formulario')
+        const botonCrear = $('#crear')
+        const recursoSpan = $('#formulario span')
+
+        formularioRecurso?.addEventListener('submit', e => {
+            e.preventDefault()
+            const nom = $('#nombre').value
+            const rol = $('#rol').value
+            const mail = $('#mail').value
+            const DNI = $('#dni').value
+            
+
+            fetch('/usuarios', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ DNI, mail, rol, nom})
+            })
+                .then(res => {
+                    if (res.ok) {
+                        recursoSpan.innerText = 'Usuario Creado'
+                        recursoSpan.style.color = 'green'
+                        setTimeout(() => {
+                            window.location.href = '/Usuarios'
+                        }, 2000)
+                    } else {
+                        recursoSpan.innerText = 'Error al crear Usuario'
+                        recursoSpan.style.color = 'red'
+                    }
+                })
+        });
+
+    </script>
+</body>
+</html>

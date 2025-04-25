@@ -1,0 +1,78 @@
+
+/* Cabecera */
+header {
+    background-color: #007BFF; /* Azul */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Títulos */
+h1, h2 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-align: center;
+}
+
+/* Estilo del contenido principal */
+main {
+    padding: 20px;
+}
+
+/* Lista de recursos */
+.lista {
+    margin: 50px auto;
+    list-style-type: none;
+    padding: 0;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    margin: 10px 0;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.item:hover {
+    background-color: #f7f7f7; /* Fondo gris claro para hover */
+}
+.item a {
+    text-decoration: none;
+    color: #333;
+    display: flex;
+    flex-direction: row;
+}
+
+.informacion {
+    width: 80%;
+}
+
+.item strong {
+    font-size: 1.1rem;
+    color: #007BFF; /* Azul */
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+    
+    header h2 {
+        font-size: 1.2rem;
+    }
+}

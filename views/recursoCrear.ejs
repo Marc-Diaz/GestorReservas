@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas</title>
+    <link rel="stylesheet" href="../barraNavegacion.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../formulario.css">
+</head>
+
+<body>
+    <nav>
+        <%- htmlNav %>
+    </nav>
+    <header>
+        <h1>GESTION DE RESERVAS </h1>
+    </header>
+    <main>
+        <section>
+            <h2>Crear recurso</h2>
+            <form id="formulario">
+                <label for="nombre">Nombre: </label>
+                <input type="text" name="nombre" id="nombre" required>
+
+                <label for="imagen">Imagen: </label>
+                <input type="text" name="enlace-imagen" id="enlace-imagen" required>
+
+                <label for="precio-hora">Precio Hora: </label>
+                <input type="number" name="precio-hora" id="precio-hora" required>
+
+                <label for="categoria">Categoria: </label>
+                <input type="text" name="categoria" id="categoria" required>
+
+                <label for="">Descripcion: </label>
+                <textarea  name="descripcion" id="descripcion" required></textarea>
+                <button type="submit" id="crear-recurso">Crear recurso</button>
+                <span>&nbsp;</span>
+            </form>
+        </section>
+    </main>
+    <script>
+        const $ = el => document.querySelector(el);
+        const formularioRecurso = $('#formulario')
+        const botonCrear = $('#crear-recurso')
+        const recursoSpan = $('#formulario span')
+
+        formularioRecurso?.addEventListener('submit', e => {
+            e.preventDefault()
+            const nom = $('#nombre').value
+            const imatge = $('#enlace-imagen').value
+            const categoria = $('#categoria').value
+            const descripcio = $('#descripcion').value
+            const preuHora = $('#precio-hora').value
+            
+
+            fetch('/recursos', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ imatge, nom, descripcio, preuHora, categoria})
+            })
+                .then(res => {
+                    if (res.ok) {
+                        recursoSpan.innerText = 'Recurso Creado'
+                        recursoSpan.style.color = 'green'
+                        setTimeout(() => {
+                            window.location.href = '/Recursos'
+                        }, 2000)
+                    } else {
+                        recursoSpan.innerText = 'Error al crear Recurso'
+                        recursoSpan.style.color = 'red'
+                    }
+                })
+        });
+
+    </script>
+</body>
+</html>

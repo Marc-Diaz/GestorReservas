@@ -2,10 +2,13 @@
 import express from "express";
 import fs from "fs";
 import bodyParser from "body-parser";
+import { htmlNav } from "../config.js";
+
 
 //Crea l'objecte de l'aplicació
-const app = express();
-app.use(bodyParser.json());
+const route = express.Router();
+
+route.use(bodyParser.json());
 
 //Llegeix les dades del fitxer
 const readData = () => {
@@ -26,30 +29,48 @@ const writeData = (data) => {
     }
 };
 
-
-app.get("/", (req,res)=>{
-    res.send("Welcome to my first API with Node.js");
+//GET
+route.get("/", (req,res)=>{
+    const data = readData();
+    res.render("usuarios", {data, htmlNav})
+    //res.json(data.usuarios)
 });
 
-//GET
-app.get("/Usuarios", (req,res)=>{
+route.get("/crearUsuario", (req,res)=>{
     const data = readData();
-    res.json(data.usuarios);
+    res.render("usuarioCrear", {htmlNav})
+    //res.json(data.usuarios)
+});
+
+route.get("/editarUsuario/:id", (req,res)=>{
+    const data=readData();
+    const id = req.params.id;
+    
+    const usuario = data.usuarios.find((usuario)=>usuario.DNI == id);
+
+    if(!usuario) res.status(404).json({message : "Usuari no trobat"});
+    else {
+        res.render("usuarioEditar", {usuario, htmlNav})
+        //res.json(usuario);
+    }
 });
 
 //GET per id
-app.get("/Usuarios/:id",(req,res)=>{
+route.get("/:id",(req,res)=>{
     const data=readData();
     const id = req.params.id;
-    console.log(id);
-    const usuario = data.usuarios.find((usuario)=>usuario.DNI === id);
+    
+    const usuario = data.usuarios.find((usuario)=>usuario.DNI == id);
 
     if(!usuario) res.status(404).json({message : "Usuari no trobat"});
-    res.json(usuario);
+    else {
+        res.render("usuarioDetalle", {usuario, htmlNav})
+        //res.json(usuario);
+    }
 });
 
 //POST
-app.post("/Usuarios",(req,res)=>{
+route.post("/",(req,res)=>{
     const data=readData();
     const body=req.body;
     //todo lo que viene en ...body se agrega al nuevo libro
@@ -68,7 +89,7 @@ app.post("/Usuarios",(req,res)=>{
 });
 
 //PUT
-app.put("/Usuarios/:id", (req, res) => {
+route.put("/:id", (req, res) => {
     const data = readData();
     const id = req.params.id;
     const body = req.body;
@@ -87,7 +108,7 @@ app.put("/Usuarios/:id", (req, res) => {
 });
     
 //DELETE
-app.delete("/Usuarios/:id", (req, res) => {
+route.delete("/:id", (req, res) => {
     const data = readData();
     const id = req.params.id;
     const usuarioIndex = data.usuarios.findIndex((usuario) => usuario.DNI === id);
@@ -101,7 +122,4 @@ app.delete("/Usuarios/:id", (req, res) => {
     }    
 });
 
-//Funció per escoltar
-app.listen(3001,() => {
-    console.log("Server listening on port 3001");
-});
+export default route
